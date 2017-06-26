@@ -1,7 +1,8 @@
 from __future__ import print_function
-import keras
 import pickle
 import datahandler
+import numpy as np
+import keras
 from keras.preprocessing.image import ImageDataGenerator
 from keras.datasets import cifar10
 from keras.models import Sequential
@@ -16,8 +17,10 @@ class Network:
     epochs = 200
     data_augmentation = True
     data = datahandler.DataHandler
-    preprocess = False
+    prepr = False
     model = Sequential()
+    datagen = None
+    opt = None
 
     def __init__(self, batch_size, num_classes, epochs, data_augmentation, data):
         self.batch_size = batch_size
@@ -27,14 +30,13 @@ class Network:
         self.data = data
 
     def define_model(self, model):
-        assert isinstance(model) == Sequential()
+        assert isinstance(model, Sequential) 
         self.model = model
-
 
     def preprocess(self, custom = False):
         """DOCSTRING HERE"""
 
-        self.preprocess = True
+        self.prepr = True
         if custom:
             assert type(custom) is ImageDataGenerator, "custom is not of type ImageDataGenerator"
         else:
@@ -50,6 +52,23 @@ class Network:
                 horizontal_flip=True,  # randomly flip images
                 vertical_flip=False)  # randomly flip images
 
+    def optimizer(self):
+        self.opt = keras.optimizers.rmsprop(lr=0.0001, decay=1e-6)
+
+# Let's train the model using RMSprop
+    
+    
+    def compile(self, loss = 'categorical_crossentropy', metrics =['accuracy']):
+        self.model.compile(loss=loss,
+              optimizer=self.opt,
+              metrics=['accuracy'])
 
 
-
+    def train(self):
+        if self.datagen != None:
+            self.datagen.fit(self.data.x_train)
+            self.model.fit_generator(self.datagen.flow(self.data.x_train, self.data.y_train,
+                                                       batch_size=self.batch_size),
+                                     steps_per_epoch=self.data.x_train.shape[0] // self.batch_size,
+                                     epochs=self.epochs,
+                                     validation_data=(self.data.x_test, self.data.y_test))

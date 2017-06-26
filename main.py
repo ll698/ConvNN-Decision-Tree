@@ -8,7 +8,7 @@ import tensorflow as tf
 from PIL import Image as Img
 import matplotlib.pyplot as plt
 import random
-
+import loaddata
 sess = tf.InteractiveSession()
 
 
@@ -98,51 +98,52 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 sess.run(tf.global_variables_initializer())
 
-print('Training neural network...')
-print('training iterations: 20,000...')
-for i in range(20000):
-    subset = np.random.randint(4000, size=100)
-    batchX = trainX[subset, :]
-    batchY = trainY[subset, :]
-    index = 0
-    for j in batchX:
-        newimage = j.reshape(28,28)
-        rand = np.random.binomial(1, .5, 1)
+def trainNetwork():
+    print('Training neural network...')
+    print('training iterations: 20,000...')
+    for i in range(20000):
+        subset = np.random.randint(4000, size=100)
+        batchX = trainX[subset, :]
+        batchY = trainY[subset, :]
+        index = 0
+        for j in batchX:
+            newimage = j.reshape(28,28)
+            rand = np.random.binomial(1, .5, 1)
 
-        #plt.imshow(newimage)
-        #plt.show()
+            #plt.imshow(newimage)
+            #plt.show()
 
-        if rand == 1:
-            newimage = tl.prepro.elastic_transform(newimage, alpha=28 * 3, sigma=28 * 0.32)
+            if rand == 1:
+                newimage = tl.prepro.elastic_transform(newimage, alpha=28 * 3, sigma=28 * 0.32)
 
-        img = Img.fromarray(newimage)
-        rand = random.gauss(0,20)
-        rotated = Img.Image.rotate(img,rand)
+            img = Img.fromarray(newimage)
+            rand = random.gauss(0,20)
+            rotated = Img.Image.rotate(img,rand)
 
-        #plt.imshow(np.array(rotated))
-        #plt.show()
+            #plt.imshow(np.array(rotated))
+            #plt.show()
 
-        batchX[index] = np.array(rotated).flatten()
-        index = index +1;
+            batchX[index] = np.array(rotated).flatten()
+            index = index + 1
 
 
-    if i%100 == 0:
-        train_accuracy = accuracy.eval(feed_dict={x:batchX, y_: batchY, keep_prob: 1.0})
+        if i%100 == 0:
+            train_accuracy = accuracy.eval(feed_dict={x:batchX, y_: batchY, keep_prob: 1.0})
 
-    print("step %d, training accuracy %g"%(i, train_accuracy))
-    train_step.run(feed_dict={x: batchX, y_: batchY, keep_prob: 0.5})
+        print("step %d, training accuracy %g"%(i, train_accuracy))
+        train_step.run(feed_dict={x: batchX, y_: batchY, keep_prob: 0.5})
 
-print("test accuracy %g"%accuracy.eval(feed_dict={
-    x: batchX, y_: batchY, keep_prob: 1.0}))
-print("running test set...")
-prediction=tf.argmax(y_conv,1)
-pred = np.array(prediction.eval(feed_dict={x: testX, keep_prob: 1.0}))
+    print("test accuracy %g"%accuracy.eval(feed_dict={
+        x: batchX, y_: batchY, keep_prob: 1.0}))
+    print("running test set...")
+    prediction=tf.argmax(y_conv,1)
+    pred = np.array(prediction.eval(feed_dict={x: testX, keep_prob: 1.0}))
 
-print("writing to file...")
-file = open('pred.txt', 'w')
-file.write("%s\n" % "id,digit")
-for i in range(0,800):
-    item = str(i) + ',' + str(pred[i])
-    file.write("%s\n" % item)
+    print("writing to file...")
+    file = open('pred.txt', 'w')
+    file.write("%s\n" % "id,digit")
+    for i in range(0,800):
+        item = str(i) + ',' + str(pred[i])
+        file.write("%s\n" % item)
 
-print("done")
+    print("done")

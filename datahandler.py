@@ -1,5 +1,3 @@
-from __future__ import print_function
-import pickle
 import numpy as np
 import cifar
 import keras
@@ -12,8 +10,7 @@ class DataHandler:
         self.x_test = x_test
         self.y_test = y_test
 
-    def load_data_set(self, filepath,
-                      unpickle=True, normalize=True, scale=255):
+    def load_cifar_data_set(self, filepath, normalize=True, scale=255):
         """DOCSTRING HERE"""
 
         x_train = np.zeros((50000, 32, 32, 3), dtype='uint8')
@@ -45,32 +42,6 @@ class DataHandler:
             self.x_test /= 255
 
 
-
-
-       # self.x_train = np.reshape(self.x_train, list(np.shape(self.x_train)) + [1, 1, 1])
-        #self.x_test = np.reshape(self.x_test, list(np.shape(self.x_test)) + [1])
-
-        #print(self.x_train.shape)
-        #self.x_train = self.x_train[::32, 32, 3]
-        #self.x_test = self.x_test[::32, 32, 3]
-        print(self.x_train.shape)
-
     def sort_data_by_label(self, x_data, label):
         """DOCSTRING HERE"""
         return NotImplementedError
-
-
-    def concatenate_training_data(self, x_data, y_data=None):
-        """DOCSTRING HERE"""
-
-        if isinstance(x_data) is DataHandler:
-            x_data = x_data.x_train
-            y_data = x_data.y_train
-
-
-
-
-        assert self.x_train.shape[1] == x_data.shape[1], "data shapes do not match: %r vs %r" % (self.x_train.shape, x_data.shape)
-        assert self.y_train.shape[1] == y_data.shape[1], "label shapes do not match: %r vs %r" % (self.y_train.shape, y_data.shape)
-        self.x_train = np.concatenate(self.x_train, x_data)
-        self.y_train = np.concatenate(self.y_train, y_data)

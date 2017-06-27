@@ -37,19 +37,3 @@ class DataHandler:
         """DOCSTRING HERE"""
         return NotImplementedError
 
-
-    def concatenate_training_data(self, x_data, y_data=None):
-        """DOCSTRING HERE"""
-
-        if isinstance(x_data) is DataHandler:
-            x_data = x_data.x_train
-            y_data = x_data.y_train
-
-
-
-
-        assert self.x_train.shape[1] == x_data.shape[1], "data shapes do not match: %r vs %r" % (self.x_train.shape, x_data.shape)
-        assert self.y_train.shape[1] == y_data.shape[1], "label shapes do not match: %r vs %r" % (self.y_train.shape, y_data.shape)
-        self.x_train = np.concatenate(self.x_train, x_data)
-        self.y_train = np.concatenate(self.y_train, y_data)
-

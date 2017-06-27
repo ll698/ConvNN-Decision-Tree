@@ -26,7 +26,6 @@ class Network:
     right = None
     name = "placeholder"
 
-
     def __init__(self, name, batch_size, num_classes, epochs, data_augmentation, data):
         self.name = name
         self.batch_size = batch_size

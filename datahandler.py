@@ -1,3 +1,4 @@
+
 import numpy as np
 import cifar
 import keras
@@ -13,7 +14,7 @@ class DataHandler:
     def load_cifar_data_set(self, filepath, normalize=True, scale=255):
         """DOCSTRING HERE"""
 
-        x_train = np.zeros((50000, 32, 32, 3), dtype='uint8')
+        x_train = np.zeros((50000, 3, 32, 32), dtype='uint8')
         y_train = np.zeros((50000,), dtype='uint8')
 
         for i in range(1, 6):
@@ -25,19 +26,18 @@ class DataHandler:
         fpath = 'data/cifar10/test_batch'
         x_test, y_test = cifar.load_batch(fpath)
 
-
-        self.x_train = x_train
-        self.x_test = x_test
-
         y_test = np.reshape(y_test, (len(y_test), 1))
         self.y_test = keras.utils.to_categorical(y_test, 10)
 
         y_train = np.reshape(y_train, (len(y_train), 1))
         self.y_train = keras.utils.to_categorical(y_train, 10)
 
+        self.x_train = np.transpose(x_train, (0, 2, 3, 1))
+        self.x_test = np.transpose(x_test, (0, 2, 3, 1))
+
         if normalize:
-            self.x_train = x_train.astype('float32')
-            self.x_test = x_test.astype('float32')
+            self.x_train = self.x_train.astype('float32')
+            self.x_test = self.x_test.astype('float32')
             self.x_train /= 255
             self.x_test /= 255
 

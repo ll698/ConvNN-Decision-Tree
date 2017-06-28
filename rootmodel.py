@@ -7,8 +7,9 @@ from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 
 # Untrained architecture for root node
+
 model = Sequential()
-model.add(Conv2D(32, (3, 3), padding='same', input_shape=(32, 32, 3)))
+model.add(Conv2D(32, (3, 3), padding='same', input_shape=(3, 32, 32)))
 model.add(Activation('relu'))
 model.add(Conv2D(32, (3, 3)))
 model.add(Activation('relu'))

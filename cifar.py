@@ -1,3 +1,4 @@
+
 from __future__ import absolute_import
 import pickle
 
@@ -14,5 +15,5 @@ def load_batch(filepath):
         data = d['data']
         labels = d['labels']
 
-        data = data.reshape(data.shape[0], 32, 32, 3)
+        data = data.reshape(data.shape[0], 3, 32, 32)
         return data, labels

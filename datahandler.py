@@ -11,7 +11,7 @@ class DataHandler:
         self.x_test = x_test
         self.y_test = y_test
 
-    def load_cifar_data_set(self, filepath, normalize=True, scale=255):
+    def load_cifar_data_set(self, filepath, scale=255):
         """DOCSTRING HERE"""
 
         x_train = np.zeros((50000, 3, 32, 32), dtype='uint8')
@@ -35,11 +35,12 @@ class DataHandler:
         self.x_train = np.transpose(x_train, (0, 2, 3, 1))
         self.x_test = np.transpose(x_test, (0, 2, 3, 1))
 
-        if normalize:
-            self.x_train = self.x_train.astype('float32')
-            self.x_test = self.x_test.astype('float32')
-            self.x_train /= 255
-            self.x_test /= 255
+    def normalize(self):
+        """"DOCSTRING HERE"""
+        self.x_train = self.x_train.astype('float32')
+        self.x_test = self.x_test.astype('float32')
+        self.x_train /= 255
+        self.x_test /= 255
 
 
     def sort_data_by_label(self, x_data, label):

@@ -25,7 +25,7 @@ root_network.preprocess()
 root_network.optimizer(0.0001, 1e-6)
 root_network.compile()
 #root_network.save_model()
-root_network.train(batch_size, epoch)
+root_network.train(batch_size, epochs)
 """
 
 from __future__ import print_function

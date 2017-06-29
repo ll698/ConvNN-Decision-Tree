@@ -1,19 +1,24 @@
 
 from __future__ import absolute_import
-import pickle
+import sys
+from six.moves import cPickle
 
 
 #CIFAR10 decode helper function
-def load_batch(filepath):
-    with open(filepath, 'rb') as fo:
-        d = pickle.load(fo, encoding='bytes')
+def load_batch(fpath):
+    f = open(fpath, 'rb')
+    if sys.version_info < (3,):
+        d = cPickle.load(f)
+    else:
+        d = cPickle.load(f, encoding='bytes')
+        # decode utf8
         d_decoded = {}
         for k, v in d.items():
             d_decoded[k.decode('utf8')] = v
         d = d_decoded
-        fo.close()
-        data = d['data']
-        labels = d['labels']
+    f.close()
+    data = d['data']
+    labels = d['labels']
 
-        data = data.reshape(data.shape[0], 3, 32, 32)
-        return data, labels
+    data = data.reshape(data.shape[0], 3, 32, 32)
+    return data, labels

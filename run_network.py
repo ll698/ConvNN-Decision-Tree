@@ -4,6 +4,7 @@ import networkhandler
 import rootmodel
 import keras
 from keras.datasets import cifar10
+import cifar
 
 
 
@@ -12,15 +13,16 @@ dataset = datahandler.DataHandler()
 #dataset.load_cifar_data_set("data/cifar10/data_batch_")
 #dataset.normalize()
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
+print('x_train shape:', x_train.shape)
+print(x_train.shape[0], 'train samples')
+print(x_test.shape[0], 'test samples')
+
 y_train = keras.utils.to_categorical(y_train,10)
 y_test = keras.utils.to_categorical(y_test, 10)
 dataset.x_train = x_train
 dataset.y_train = y_train
 dataset.x_test = x_test
 dataset.y_test = y_test
-print('x_train shape:', x_train.shape)
-print(x_train.shape[0], 'train samples')
-print(x_test.shape[0], 'test samples')
 
 
 #init network

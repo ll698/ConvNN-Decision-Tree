@@ -38,7 +38,7 @@ def newModel(x_train, num_classes):
     #return model"""
 
 
-    image = Input(shape=(3, 32, 32))
+    image = Input(shape=x_train.shape[1:])
     inc_conv1 = Conv2D(32, (3, 3), activation='relu', padding='same')(image)
     inc_conv2 = Conv2D(64, (6, 6), activation='relu', padding='same')(inc_conv1)
     inc_conv3 = Conv2D(64, (12, 12), activation='relu', padding='same')(inc_conv2)

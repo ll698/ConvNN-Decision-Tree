@@ -12,6 +12,8 @@ dataset = datahandler.DataHandler()
 #dataset.load_cifar_data_set("data/cifar10/data_batch_")
 #dataset.normalize()
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
+y_train = keras.utils.to_categorical(y_train, num_classes)
+y_test = keras.utils.to_categorical(y_test, num_classes)
 dataset.x_train = x_train
 dataset.y_train = y_train
 dataset.x_test = x_test

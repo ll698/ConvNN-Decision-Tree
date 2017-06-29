@@ -8,7 +8,7 @@ from keras.datasets import cifar10
 
 num_classes = 10
 batch_size = 32
-epochs = 50
+epochs = 200
 lrate = 0.01
 decay = lrate/epochs
 
@@ -30,7 +30,7 @@ print(root_network.model.summary())
 #root_network.data.normalize()
 #root_network.save_model()
 root_network.train(batch_size, epochs)
-scores = root_network.model.evaluate(root_network.data.X_test, root_network.data.y_test, verbose=0)
+scores = root_network.model.evaluate(root_network.data.x_test, root_network.data.y_test, verbose=0)
 print("Accuracy: %.2f%%" % (scores[1]*100))
 
 

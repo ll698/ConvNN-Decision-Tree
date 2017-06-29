@@ -18,7 +18,7 @@ dataset.load_cifar_data_set(num_classes)
 dataset.normalize(255)
 
 #init network
-root_network = networkhandler.Network("root", batch_size, num_classes, epochs, True, dataset)
+root_network = networkhandler.Network("experiment", batch_size, num_classes, epochs, True, dataset)
 
 #define root network model
 root_network.define_model(rootmodel.newModel(dataset.x_train, num_classes))

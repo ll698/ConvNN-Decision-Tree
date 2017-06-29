@@ -48,9 +48,9 @@ def newModel(x_train, num_classes):
     dec_conv3 = Conv2D(64, (3, 3), activation='relu', padding='same')(dec_conv2)
 
     conc = keras.layers.concatenate([inc_conv3, dec_conv3], axis=1)
-
-    dense1 = Dense(512, activation='relu')(conc)
-    dense2 = Dense(512, activation='relu')(dense1)
-    dense3 = Dense(256, activation='relu')(dense2)
+    out = Flatten()(conc)
+    dense1 = Dense(512, activation='relu', kernel_constraint=maxnorm(3))(out)
+    dense2 = Dense(512, activation='relu', kernel_constraint=maxnorm(3))(dense1)
+    dense3 = Dense(256, activation='relu', kernel_constraint=maxnorm(3))(dense2)
     output = Dense(10, activation='softmax')(dense3)
     return Model(inputs=image, outputs=output)

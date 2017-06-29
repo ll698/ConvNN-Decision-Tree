@@ -65,9 +65,6 @@ class Network:
         self.model.compile(loss = loss, optimizer = self.opt, metrics = metrics)
 
 
-
-
-
     #Trains network on x_dataset
     def train(self, batch_size, epochs):
         if self.datagen != None:

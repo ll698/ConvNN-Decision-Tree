@@ -1,7 +1,7 @@
 
 import numpy as np
-import cifar
 import keras
+from keras.datasets import cifar10
 
 class DataHandler:
 
@@ -11,36 +11,28 @@ class DataHandler:
         self.x_test = x_test
         self.y_test = y_test
 
-    def load_cifar_data_set(self, filepath, scale=255):
+    def load_cifar_data_set(self, num_classes):
         """DOCSTRING HERE"""
 
-        x_train = np.zeros((50000, 3, 32, 32), dtype='uint8')
-        y_train = np.zeros((50000,), dtype='uint8')
+        (x_train, y_train), (x_test, y_test) = cifar10.load_data()
+        print('x_train shape:', x_train.shape)
+        print(x_train.shape[0], 'train samples')
+        print(x_test.shape[0], 'test samples')
 
-        for i in range(1, 6):
-            fpath = filepath+ str(i)
-            data, labels = cifar.load_batch(fpath)
-            x_train[(i - 1) * 10000: i * 10000, :, :, :] = data
-            y_train[(i - 1) * 10000: i * 10000] = labels
+        y_train = keras.utils.to_categorical(y_train, num_classes)
+        y_test = keras.utils.to_categorical(y_test, num_classes)
+        self.x_train = x_train
+        self.y_train = y_train
+        self.x_test = x_test
+        self.y_test = y_test
+        self.normalize(255)
 
-        fpath = 'data/cifar10/test_batch'
-        x_test, y_test = cifar.load_batch(fpath)
-
-        y_test = np.reshape(y_test, (len(y_test), 1))
-        self.y_test = keras.utils.to_categorical(y_test, 10)
-
-        y_train = np.reshape(y_train, (len(y_train), 1))
-        self.y_train = keras.utils.to_categorical(y_train, 10)
-
-        self.x_train = np.transpose(x_train, (0, 2, 3, 1))
-        self.x_test = np.transpose(x_test, (0, 2, 3, 1))
-
-    def normalize(self):
+    def normalize(self, val):
         """"DOCSTRING HERE"""
         self.x_train = self.x_train.astype('float32')
         self.x_test = self.x_test.astype('float32')
-        self.x_train /= 255
-        self.x_test /= 255
+        self.x_train /= val
+        self.x_test /= val
 
 
     def sort_data_by_label(self, x_data, label):

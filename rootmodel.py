@@ -9,9 +9,11 @@ from keras.layers import Conv2D, MaxPooling2D
 # Untrained architecture for root node
 
 
-def newModel(x_train):
+def newModel(x_train, num_classes):
     model = Sequential()
-    model.add(Conv2D(32, (3, 3), padding='same', input_shape=x_train.shape[1:]))
+
+    model.add(Conv2D(32, (3, 3), padding='same',
+                 input_shape=x_train.shape[1:]))
     model.add(Activation('relu'))
     model.add(Conv2D(32, (3, 3)))
     model.add(Activation('relu'))
@@ -19,7 +21,6 @@ def newModel(x_train):
     model.add(Dropout(0.25))
 
     model.add(Conv2D(64, (3, 3), padding='same'))
-
     model.add(Activation('relu'))
     model.add(Conv2D(64, (3, 3)))
     model.add(Activation('relu'))
@@ -30,6 +31,6 @@ def newModel(x_train):
     model.add(Dense(512))
     model.add(Activation('relu'))
     model.add(Dropout(0.5))
-    model.add(Dense(10))
+    model.add(Dense(num_classes))
     model.add(Activation('softmax'))
     return model

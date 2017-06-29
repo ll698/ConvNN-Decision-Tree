@@ -24,7 +24,7 @@ root_network.define_model(rootmodel.newModel(dataset.x_train, num_classes))
 root_network.preprocess()
 opt = keras.optimizers.rmsprop(lr=0.0001, decay=1e-6)
 root_network.compile(opt)
-root_network.data.normalize()
+#root_network.data.normalize()
 #root_network.save_model()
 root_network.train(batch_size, epochs)
 

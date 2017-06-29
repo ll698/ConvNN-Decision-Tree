@@ -25,7 +25,7 @@ class DataHandler:
         self.y_train = y_train
         self.x_test = x_test
         self.y_test = y_test
-        self.normalize(255)
+        #self.normalize(255)
 
     def normalize(self, val):
         """"DOCSTRING HERE"""

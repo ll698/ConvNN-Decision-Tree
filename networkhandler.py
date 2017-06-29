@@ -61,13 +61,13 @@ class Network:
         self.opt = keras.optimizers.rmsprop(lr, decay)
 
     # Let's train the model using RMSprop
-    def compile(self, loss = 'categorical_crossentropy', metrics =['accuracy']):
-        self.model.compile(loss = loss, optimizer = self.opt, metrics = metrics)
+    def compile(self, opt, loss = 'categorical_crossentropy', metrics =['accuracy']):
+        self.model.compile(loss = loss, optimizer = opt, metrics = metrics)
 
 
     #Trains network on x_dataset
     def train(self, batch_size, epochs):
-        if self.datagen != None:
+        if self.prepr != True:
             self.datagen.fit(self.data.x_train)
             self.model.fit_generator(self.datagen.flow(self.data.x_train, self.data.y_train,
                                                        batch_size=batch_size),
@@ -82,6 +82,17 @@ class Network:
               epochs=epochs,
               validation_data=(self.data.x_test, self.data.y_test),
               shuffle=True)
+
+
+
+
+
+
+
+
+
+
+
     #Model and Architecture save and store operations
     def save_model(self):
         self.model.save("models/" + self.name + ".h5")

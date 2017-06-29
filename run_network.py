@@ -16,6 +16,10 @@ dataset.x_train = x_train
 dataset.y_train = y_train
 dataset.x_test = x_test
 dataset.y_test = y_test
+print('x_train shape:', x_train.shape)
+print(x_train.shape[0], 'train samples')
+print(x_test.shape[0], 'test samples')
+
 
 #init network
 root_network = networkhandler.Network("root", 32, 10, 200, True, dataset)

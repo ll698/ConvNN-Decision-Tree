@@ -9,13 +9,14 @@ from keras.datasets import cifar10
 
 #init and load cifar dataset
 dataset = datahandler.DataHandler()
-dataset.load_cifar_data_set("data/cifar10/data_batch_")
-dataset.normalize()
+#dataset.load_cifar_data_set("data/cifar10/data_batch_")
+#dataset.normalize()
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 dataset.x_train = x_train
 dataset.y_train = y_train
 dataset.x_test = x_test
 dataset.y_test = y_test
+
 #init network
 root_network = networkhandler.Network("root", 32, 10, 200, True, dataset)
 

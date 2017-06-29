@@ -1,4 +1,4 @@
-"""from __future__ import print_function
+from __future__ import print_function
 import datahandler
 import networkhandler
 import rootmodel
@@ -25,7 +25,8 @@ root_network.preprocess()
 root_network.optimizer(0.0001, 1e-6)
 root_network.compile()
 #root_network.save_model()
-root_network.train(batch_size, epoch)"""
+root_network.train(batch_size, epoch)
+"""
 
 from __future__ import print_function
 import keras
@@ -118,7 +119,6 @@ else:
                                      batch_size=batch_size),
                         steps_per_epoch=x_train.shape[0] // batch_size,
                         epochs=epochs,
-                        validation_data=(x_test, y_test))
-
+                        validation_data=(x_test, y_test))"""
 
 

@@ -9,6 +9,9 @@ from keras.datasets import cifar10
 num_classes = 10
 batch_size = 32
 epochs = 200
+epochs = 25
+lrate = 0.01
+decay = lrate/epochs
 
 #init and load cifar dataset
 dataset = datahandler.DataHandler()
@@ -22,7 +25,7 @@ root_network = networkhandler.Network("root", batch_size, num_classes, epochs, T
 root_network.define_model(rootmodel.newModel(dataset.x_train, num_classes))
 #root_network.load_model("models/root.h5")
 root_network.preprocess()
-opt = keras.optimizers.rmsprop(lr=0.0001, decay=1e-6)
+opt = keras.optimizers.SGD(lr=lrate, momentum=0.9, decay=decay, nesterov=False)
 root_network.compile(opt)
 #root_network.data.normalize()
 #root_network.save_model()

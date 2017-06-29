@@ -35,7 +35,7 @@ class Network:
         self.data = data
 
     def define_model(self, model):
-        assert isinstance(model, Sequential) 
+        #assert isinstance(model, Sequential) 
         self.model = model
 
     def preprocess(self, custom=False):

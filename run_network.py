@@ -14,7 +14,7 @@ dataset.normalize()
 root_network = networkhandler.Network("root", 32, 10, 200, True, dataset)
 
 #define root network model
-root_network.define_model(rootmodel.model())
+root_network.define_model(rootmodel.newModel())
 #root_network.load_model("models/root.h5")
 root_network.preprocess()
 root_network.optimizer(0.0001, 1e-6)

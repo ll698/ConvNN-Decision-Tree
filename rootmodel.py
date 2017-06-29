@@ -9,9 +9,9 @@ from keras.layers import Conv2D, MaxPooling2D
 # Untrained architecture for root node
 
 
-def newModel():
+def newModel(x_train):
     model = Sequential()
-    model.add(Conv2D(32, (3, 3), padding='same', input_shape=(3, 32, 32)))
+    model.add(Conv2D(32, (3, 3), padding='same', input_shape=x_train.shape[1:]))
     model.add(Activation('relu'))
     model.add(Conv2D(32, (3, 3)))
     model.add(Activation('relu'))

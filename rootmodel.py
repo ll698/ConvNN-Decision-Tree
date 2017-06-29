@@ -31,7 +31,6 @@ def newModel(x_train, num_classes):
     model.add(Dense(1024))
     model.add(Activation('relu'))
     model.add(Dropout(0.5))
-    model.add(Flatten())
     model.add(Dense(1024))
     model.add(Activation('relu'))
     model.add(Dropout(0.5))

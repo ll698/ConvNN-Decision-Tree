@@ -8,7 +8,7 @@ from keras.datasets import cifar10
 
 num_classes = 10
 batch_size = 32
-epochs = 200
+epochs = 50
 lrate = 0.01
 decay = lrate/epochs
 

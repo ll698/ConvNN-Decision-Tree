@@ -51,7 +51,7 @@ class Network:
                 featurewise_std_normalization=False,  # divide inputs by std of the dataset
                 samplewise_std_normalization=False,  # divide each input by its std
                 zca_whitening=False,  # apply ZCA whitening
-                rotation_range=0,  # randomly rotate images in the range (degrees, 0 to 180)
+                rotation_range=15,  # randomly rotate images in the range (degrees, 0 to 180)
                 width_shift_range=0.1,  # randomly shift images horizontally
                 height_shift_range=0.1,  # randomly shift images vertically
                 horizontal_flip=True,  # randomly flip images
@@ -67,7 +67,7 @@ class Network:
 
     #Trains network on x_dataset
     def train(self, batch_size, epochs):
-        if self.prepr != True:
+        if self.prepr == True:
             self.datagen.fit(self.data.x_train)
             self.model.fit_generator(self.datagen.flow(self.data.x_train, self.data.y_train,
                                                        batch_size=batch_size),
@@ -82,15 +82,6 @@ class Network:
               epochs=epochs,
               validation_data=(self.data.x_test, self.data.y_test),
               shuffle=True)
-
-
-
-
-
-
-
-
-
 
 
     #Model and Architecture save and store operations

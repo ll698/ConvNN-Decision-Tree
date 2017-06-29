@@ -28,7 +28,11 @@ def newModel(x_train, num_classes):
     model.add(Dropout(0.25))
 
     model.add(Flatten())
-    model.add(Dense(512))
+    model.add(Dense(1024))
+    model.add(Activation('relu'))
+    model.add(Dropout(0.5))
+    model.add(Flatten())
+    model.add(Dense(1024))
     model.add(Activation('relu'))
     model.add(Dropout(0.5))
     model.add(Dense(num_classes))

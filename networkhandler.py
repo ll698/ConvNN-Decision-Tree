@@ -79,7 +79,12 @@ class Network:
                                      validation_data=(self.data.x_test, self.data.y_test))
 
 
-
+        else: 
+            self.model.fit(self.data.x_train, self.data.y_train,
+              batch_size=batch_size,
+              epochs=epochs,
+              validation_data=(self.data.x_test, self.data.y_test),
+              shuffle=True)
     #Model and Architecture save and store operations
     def save_model(self):
         self.model.save("models/" + self.name + ".h5")

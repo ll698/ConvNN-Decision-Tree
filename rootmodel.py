@@ -30,5 +30,7 @@ def newModel(x_train, num_classes):
     model.add(Dropout(0.2))
     model.add(Dense(512, activation='relu', kernel_constraint=maxnorm(3)))
     model.add(Dropout(0.2))
+    model.add(Dense(256, activation='relu', kernel_constraint=maxnorm(3)))
+    model.add(Dropout(0.2))
     model.add(Dense(num_classes, activation='softmax'))
     return model

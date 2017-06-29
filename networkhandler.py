@@ -52,8 +52,8 @@ class Network:
                 samplewise_std_normalization=False,  # divide each input by its std
                 zca_whitening=False,  # apply ZCA whitening
                 rotation_range=15,  # randomly rotate images in the range (degrees, 0 to 180)
-                width_shift_range=0.1,  # randomly shift images horizontally
-                height_shift_range=0.1,  # randomly shift images vertically
+                width_shift_range=0.15,  # randomly shift images horizontally
+                height_shift_range=0.15,  # randomly shift images vertically
                 horizontal_flip=True,  # randomly flip images
                 vertical_flip=False)  # randomly flip images
 

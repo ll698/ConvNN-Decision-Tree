@@ -45,5 +45,5 @@ def newModel(x_train, num_classes):
     conv8 = Conv2D(192, (1, 1), activation='relu', padding='same')(conv7)
     conv9 = Conv2D(10, (1, 1), activation='relu', padding='same')(conv8)
     avepool = GlobalAveragePooling2D()(conv6)
-    output = Dense(num_classes, activation='softmax')
+    output = Dense(num_classes, activation='softmax')(avepool)
     return Model(inputs=image, outputs=output)

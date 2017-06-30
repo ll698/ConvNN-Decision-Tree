@@ -18,7 +18,8 @@ class DataHandler:
         print('x_train shape:', x_train.shape)
         print(x_train.shape[0], 'train samples')
         print(x_test.shape[0], 'test samples')
-
+        x, y, z, a, self.y_train = self.sort_data_by_label(x_train, y_train)
+        x, y, z, a, self.y_test = self.sort_data_by_label(x_test, y_test)
         y_train = keras.utils.to_categorical(y_train, num_classes)
         y_test = keras.utils.to_categorical(y_test, num_classes)
         self.x_train = x_train
@@ -35,6 +36,26 @@ class DataHandler:
         self.x_test /= val
 
 
-    def sort_data_by_label(self, x_data, label):
+    def sort_data_by_label(self, data, labels):
         """DOCSTRING HERE"""
-        return NotImplementedError
+        ind1 = np.where(np.logical_and(labels > 1, labels < 8))[0] 
+        ind2 = np.where(np.logical_or(labels <= 1, labels >= 8))[0] 
+        print(ind2)
+        animal_labels = labels[ind1]
+        animal_data = data[ind1]
+
+        vehicle_labels = labels[ind2]
+        vehicle_data = data[ind2]
+
+        np.put(labels,ind1, 0)
+        np.put(labels,ind2, 1)
+        print(labels.shape)
+        binary_labels = labels
+
+        temp = (vehicle_labels > 7).astype(int) * 7
+        vehicle_labels = vehicle_labels - temp
+        print(animal_labels.shape)
+        print(vehicle_labels.shape)
+        print(animal_labels)
+        print(vehicle_labels)
+        return animal_data, animal_labels, vehicle_labels, vehicle_data, binary_labels

@@ -23,7 +23,7 @@ root_network = networkhandler.Network("binary", batch_size, num_classes, epochs,
 
 #define root network model
 root_network.define_model(rootmodel.newModel(dataset.x_train, num_classes))
-#root_network.load_model("models/root.h5")
+root_network.load_model("models/binary.h5")
 root_network.preprocess()
 opt = keras.optimizers.SGD(lr=lrate, momentum=0.9, decay=decay, nesterov=False)
 root_network.compile(opt)

@@ -40,7 +40,6 @@ class DataHandler:
         """DOCSTRING HERE"""
         ind1 = np.where(np.logical_and(labels > 1, labels < 8))[0] 
         ind2 = np.where(np.logical_or(labels <= 1, labels >= 8))[0] 
-        print(ind2)
         animal_labels = labels[ind1]
         animal_data = data[ind1]
 
@@ -49,13 +48,8 @@ class DataHandler:
 
         np.put(labels,ind1, 0)
         np.put(labels,ind2, 1)
-        print(labels.shape)
         binary_labels = labels
 
         temp = (vehicle_labels > 7).astype(int) * 7
         vehicle_labels = vehicle_labels - temp
-        print(animal_labels.shape)
-        print(vehicle_labels.shape)
-        print(animal_labels)
-        print(vehicle_labels)
         return animal_data, animal_labels, vehicle_labels, vehicle_data, binary_labels

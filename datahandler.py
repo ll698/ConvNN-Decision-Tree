@@ -36,7 +36,7 @@ class DataHandler:
         self.x_test /= val
 
 
-    def sort_data_by_label(self, data, label, tag):
+    def sort_data_by_label(self, data, labels, tag):
         """DOCSTRING HERE"""
         ind1 = np.where(np.logical_and(labels > 1, labels < 8))[0] 
         ind2 = np.where(np.logical_or(labels <= 1, labels >= 8))[0] 
@@ -63,5 +63,5 @@ class DataHandler:
             return vehicle_data, vehicle_labels
 
         else:
-            return data, label
+            return data, labels
 

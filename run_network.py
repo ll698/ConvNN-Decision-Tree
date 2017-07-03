@@ -38,7 +38,7 @@ print("Accuracy: %.2f%%" % (scores[1]*100))
 
 #init and load cifar dataset
 bin_data = datahandler.DataHandler()
-bin_data.load_cifar_data_set(2, "vehicle")
+bin_data.load_cifar_data_set(4, "vehicle")
 bin_data.normalize(255)
 
 #dataset.sort_data_by_label(dataset.x_train, dataset.y_train)
@@ -63,7 +63,7 @@ print("Accuracy: %.2f%%" % (scores[1]*100))
 
 #init and load cifar dataset
 bin_data = datahandler.DataHandler()
-bin_data.load_cifar_data_set(2, "animal")
+bin_data.load_cifar_data_set(6, "animal")
 bin_data.normalize(255)
 
 #dataset.sort_data_by_label(dataset.x_train, dataset.y_train)

@@ -15,13 +15,13 @@ class DataHandler:
         """DOCSTRING HERE"""
 
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
-        print('x_train shape:', x_train.shape)
-        print(x_train.shape[0], 'train samples')
-        print(x_test.shape[0], 'test samples')
         self.x_train, self.y_train = self.sort_data_by_label(x_train, y_train, tag)
         self.x_test, self.y_test = self.sort_data_by_label(x_test, y_test, tag)
+        print(y_train.shape)
+        print(self.y_train)
         self.y_train = keras.utils.to_categorical(self.y_train, num_classes)
         self.y_test = keras.utils.to_categorical(self.y_test, num_classes)
+        print(self.y_train.shape)
         #self.normalize(255)
 
     def normalize(self, val):
@@ -48,6 +48,7 @@ class DataHandler:
 
         temp = (vehicle_labels > 7).astype(int) * 7
         vehicle_labels = vehicle_labels - temp
+        animal_labels = animal_labels - 2
 
         if (tag == "binary"):
             return data, binary_labels

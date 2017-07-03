@@ -11,6 +11,7 @@ epochs = 200
 lrate = 0.01
 decay = lrate/epochs
 
+
 #init and load cifar dataset
 bin_data = datahandler.DataHandler()
 bin_data.load_cifar_data_set(2, "binary")
@@ -56,7 +57,6 @@ root_network.train(batch_size, epochs)
 root_network.save_model()
 scores = root_network.model.evaluate(root_network.data.x_test, root_network.data.y_test, verbose=0)
 print("Accuracy: %.2f%%" % (scores[1]*100))
-
 
 #Animal classifying network---------------------------------------
 

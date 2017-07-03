@@ -56,7 +56,7 @@ class DataHandler:
         if (tag == "binary"):
             return data, binary_labels
 
-        else if (tag) == "animal"):
+        else if (tag == "animal"):
             return animal_data, animal_labels
 
         else if (tag == "vehicle"):

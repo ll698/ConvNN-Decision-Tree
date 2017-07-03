@@ -18,14 +18,10 @@ class DataHandler:
         print('x_train shape:', x_train.shape)
         print(x_train.shape[0], 'train samples')
         print(x_test.shape[0], 'test samples')
-        x, y, z, a, self.y_train = self.sort_data_by_label(x_train, y_train, tag)
-        x, y, z, a, self.y_test = self.sort_data_by_label(x_test, y_test, tag)
-        y_train = keras.utils.to_categorical(y_train, num_classes)
-        y_test = keras.utils.to_categorical(y_test, num_classes)
-        self.x_train = x_train
-        self.y_train = y_train
-        self.x_test = x_test
-        self.y_test = y_test
+        self.x_train, self.y_train = self.sort_data_by_label(x_train, y_train, tag)
+        self.x_test, self.y_test = self.sort_data_by_label(x_test, y_test, tag)
+        self.y_train = keras.utils.to_categorical(self.y_train, num_classes)
+        self.y_test = keras.utils.to_categorical(self.y_test, num_classes)
         #self.normalize(255)
 
     def normalize(self, val):

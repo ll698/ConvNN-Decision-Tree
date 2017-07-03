@@ -11,15 +11,15 @@ class DataHandler:
         self.x_test = x_test
         self.y_test = y_test
 
-    def load_cifar_data_set(self, num_classes):
+    def load_cifar_data_set(self, num_classes, tag = ""):
         """DOCSTRING HERE"""
 
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
         print('x_train shape:', x_train.shape)
         print(x_train.shape[0], 'train samples')
         print(x_test.shape[0], 'test samples')
-        x, y, z, a, self.y_train = self.sort_data_by_label(x_train, y_train)
-        x, y, z, a, self.y_test = self.sort_data_by_label(x_test, y_test)
+        x, y, z, a, self.y_train = self.sort_data_by_label(x_train, y_train, tag)
+        x, y, z, a, self.y_test = self.sort_data_by_label(x_test, y_test, tag)
         y_train = keras.utils.to_categorical(y_train, num_classes)
         y_test = keras.utils.to_categorical(y_test, num_classes)
         self.x_train = x_train
@@ -36,7 +36,7 @@ class DataHandler:
         self.x_test /= val
 
 
-    def sort_data_by_label(self, data, labels):
+    def sort_data_by_label(self, data, label, tag):
         """DOCSTRING HERE"""
         ind1 = np.where(np.logical_and(labels > 1, labels < 8))[0] 
         ind2 = np.where(np.logical_or(labels <= 1, labels >= 8))[0] 
@@ -52,4 +52,16 @@ class DataHandler:
 
         temp = (vehicle_labels > 7).astype(int) * 7
         vehicle_labels = vehicle_labels - temp
-        return animal_data, animal_labels, vehicle_labels, vehicle_data, binary_labels
+
+        if (tag == "binary"):
+            return data, binary_labels
+
+        else if (tag) == "animal"):
+            return animal_data, animal_labels
+
+        else if (tag == "vehicle"):
+            return vehicle_data, vehicle_labels
+
+        else:
+            return data, label
+

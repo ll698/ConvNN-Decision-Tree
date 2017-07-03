@@ -13,7 +13,6 @@ from keras.models import Model
 
 def newModel(x_train, num_classes):
 
-    """
     model = Sequential()
     model.add(Conv2D(32, (3, 3), input_shape=x_train.shape[1:], activation='relu', padding='same'))
     model.add(Dropout(0.2))
@@ -47,3 +46,4 @@ def newModel(x_train, num_classes):
     avepool = GlobalAveragePooling2D()(conv6)
     output = Dense(num_classes, activation='softmax')(avepool)
     return Model(inputs=image, outputs=output)
+    """
